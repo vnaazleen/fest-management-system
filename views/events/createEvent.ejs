@@ -1,0 +1,45 @@
+<%- include('../partials/header') -%>
+
+    <div class="container">
+        <h1 class="lead display-4">Create Event</h1>
+
+        <form action="/events/new" method="post">
+            <div class="mt-5 mb-3">
+                <label for="name" class="form-label">Name</label>
+                <input type="text" class="form-control" name="title" id="name" placeholder="Enter event name">
+            </div>
+
+            <div class="mb-3">
+                <label for="image" class="form-label">Banner</label>
+                <!-- <input type="file" class="form-control" id="image" placeholder="Banner Image"> -->
+                <input type="url" class="form-control" name="image" class="image" id="image" placeholder="Enter URL of Banner Image">
+            </div>
+
+            <div class="mb-3">
+                <label for="description" class="form-label">Description</label>
+                <textarea id="description" class="form-control" name="description" rows="10"></textarea>
+            </div>
+
+            <div class="mb-3">
+                <label for="type" class="form-label">Type</label>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="type" value="1" id="technical">
+                    <label class="form-check-label" for="technical">
+                        Technical
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="type" value="0" id="non-technical">
+                    <label class="form-check-label" for="non-technical">
+                        Non-Technical
+                    </label>
+                </div>
+            </div>
+
+            <div class="mb-10">
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+        </form>
+    </div>
+
+    <%- include('../partials/footer') -%>

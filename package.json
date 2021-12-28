@@ -18,6 +18,8 @@
   "homepage": "https://github.com/vnaazleen/fest-management-system#readme",
   "dependencies": {
     "body-parser": "^1.19.1",
+    "dot-env": "^0.0.1",
+    "dotenv": "^10.0.0",
     "ejs": "^3.1.6",
     "express": "^4.17.2",
     "mongoose": "^6.1.3"
