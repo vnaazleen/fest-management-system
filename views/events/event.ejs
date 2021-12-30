@@ -1,11 +1,27 @@
-<%- include('../partials/header') -%>
+<%- include('../partials/header', { pageTitle: event.title }) -%>
+
+<style>
+    img {
+        max-width: 100%;
+    }
+</style>
 
 <div class="container">
     <h1><%= event.title %></h1>
 
-    <img src="<%= event.image %>" alt="<%= event.title %>"/>
+    <img class="mt-2 mb-3" src="<%= event.image %>" alt="<%= event.title %>"/>
 
     <p><%= event.description %></p>
+
+    <div class="mt-4 mb-5">
+
+        <a href="/events/edit/<%= event.id %>" class="btn btn-warning">Edit</a>
+
+        <form action="/events/<%= event.id %>?_method=DELETE" method="post" class="d-inline">
+            <button type="submit" class="btn btn-danger">Delete</button>
+        </form>
+
+    </div>
     
 </div>
 

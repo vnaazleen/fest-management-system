@@ -33,7 +33,14 @@ router.get("/nontech", async (req, res) => {
 // ---------- CREATING A NEW EVENT ---------------
 
 router.get("/new", (req, res) => {
-    res.render("events/createEvent")
+    const dummyEvent = new Event({
+        title: "",
+        image: "",
+        description: "",
+        type: 1
+    })
+
+    res.render("events/createEvent", { event : dummyEvent })
 })
 
 router.post("/new", async (req, res) => {
@@ -60,6 +67,36 @@ router.post("/new", async (req, res) => {
 router.get("/:id", async (req, res) => {
     const event = await Event.findById(req.params.id)
     res.render("events/event", { event: event})
+})
+
+// ---------- UPDATING A EVENT ---------------
+router.get("/edit/:id", async (req, res) => {
+    const event = await Event.findById(req.params.id)
+    res.render("events/createEvent", { event: event, operation: "edit"})
+})
+
+router.put("/:id", async (req, res) => {
+
+    const type = parseInt(req.body.type)
+    
+    await Event.findByIdAndUpdate(
+        req.params.id,
+        {
+            title: req.body.title,
+            image: req.body.image,
+            description: req.body.description,
+            type: type
+        }
+    )
+
+    res.redirect(`/events/${req.params.id}`)
+})
+
+// ---------- DELETING A EVENT ---------------
+
+router.delete("/:id", async (req, res) => {
+    await Event.findByIdAndDelete(req.params.id)
+    res.redirect("/events")
 })
 
 

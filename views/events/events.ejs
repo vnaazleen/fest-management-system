@@ -1,4 +1,4 @@
-<%- include('../partials/header') -%>
+<%- include('../partials/header', { pageTitle: "VIVA VVIT - Events"}) -%>
 
 <div class="container">
     <h1 class="lead display-4 mb-5"><%= title %></h1>
@@ -7,25 +7,27 @@
         <p class="lead">Currently, No <%= title %> :( <br> Come back later...</p>
     <% } %>
 
-    <% events.forEach(event => { %>
-
-        <div class="card" style="width: 18rem;">
-            <img class="card-img-top" src="<%= event.image %>" alt="Card image cap">
-            <div class="card-body">
-            <h5 class="card-title"><%= event.title %></h5>
-            <h6 class="card-text">
-                <% if (event.type) { %>
-                    Technical Event
-                <% } else { %>
-                    Non-Technical Event
-                <% } %>
-            </h6>
-            <p class="card-text"><%= event.description.substring(0, 100) %></p>
-            <a href="/events/<%= event.id %>" class="btn btn-primary">View Event</a>
+    <div class="row">
+        <% events.forEach(event => { %>
+            <div class="col-md-4 col-sm-12">
+                <div class="card m-1">
+                    <img class="card-img-top" src="<%= event.image %>" alt="Card image cap">
+                    <div class="card-body">
+                    <h5 class="card-title"><%= event.title %></h5>
+                    <h6 class="card-text">
+                        <% if (event.type) { %>
+                            Technical Event
+                        <% } else { %>
+                            Non-Technical Event
+                        <% } %>
+                    </h6>
+                    <p class="card-text"><%= event.description.substring(0, 100) %></p>
+                    <a href="/events/<%= event.id %>" class="btn btn-primary">View Event</a>
+                    </div>
+                </div>
             </div>
-        </div>
-
-    <% }) %>
+        <% }) %>
+    </div>
 </div>
 
 <%- include('../partials/footer') -%>
