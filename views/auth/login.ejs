@@ -1,18 +1,17 @@
-<%- include('../partials/header', { pageTitle: "VIVA VVIT - Login"}) -%>
+<%- include('../partials/header', { pageTitle: "VIVA VVIT - Login", user: user}) -%>
 
 <div class="container">
     <div class="border p-5">
         <h1 class="lead display-4 mb-5 text-center">Login</h1>
-
         <form atcion="/auth/login" method="post">
             <div class="mt-5 mb-3">
                 <label for="email" class="form-label">Email ID</label>
-                <input type="text" class="form-control" name="email" id="email" placeholder="Enter your email id">
+                <input type="text" class="form-control" name="email" id="email" placeholder="Enter your email id" required>
             </div>
 
             <div class="mt-3 mb-3">
                 <label for="password" class="form-label">Password</label>
-                <input type="password" class="form-control" name="password" id="password" placeholder="Enter password">
+                <input type="password" class="form-control" name="password" id="password" placeholder="Enter password" required>
             </div>
 
             <span class="d-flex justify-content-center">

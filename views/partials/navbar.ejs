@@ -22,8 +22,12 @@
         </ul>
 
         <div class="col-md-3 text-end">
-            <a  href="/auth/login" class="btn btn-outline-primary me-2">Login</a>
-            <a  href="/auth/register" class="btn btn-primary">Register</a>
+            <% if(user == null) { %>
+                <a  href="/auth/login" class="btn btn-outline-primary me-2">Login</a>
+                <a  href="/auth/register" class="btn btn-primary">Register</a>
+            <% } else { %>
+                <a  href="/auth/logout" class="btn btn-outline-primary me-2">Logout</a>
+            <% } %>
         </div>
     </header>
 </div>

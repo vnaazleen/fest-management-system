@@ -17,12 +17,18 @@
   },
   "homepage": "https://github.com/vnaazleen/fest-management-system#readme",
   "dependencies": {
+    "bcrypt": "^5.0.1",
     "body-parser": "^1.19.1",
     "dot-env": "^0.0.1",
     "dotenv": "^10.0.0",
     "ejs": "^3.1.6",
     "express": "^4.17.2",
+    "express-flash": "^0.0.2",
+    "express-session": "^1.17.2",
     "method-override": "^3.0.0",
-    "mongoose": "^6.1.3"
+    "mongoose": "^6.1.3",
+    "passport": "^0.5.2",
+    "passport-local": "^1.0.0",
+    "passport-local-mongoose": "^6.1.0"
   }
 }

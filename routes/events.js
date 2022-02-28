@@ -9,7 +9,7 @@ const Event = require('../models/event')
 // ---------- ALL EVNETS PAGE -----------------
 
 router.get("/", async (req, res) => {
-    res.render("events/events", { title: 'Events', events: await Event.find()})
+    res.render("events/events", { title: 'Events', user: req.user, events: await Event.find()})
 })
 
 // ---------- TECHNICAL EVNETS PAGE ------------
@@ -17,7 +17,7 @@ router.get("/", async (req, res) => {
 router.get("/tech", async (req, res) => {
     const events = await Event.find()
     const technicalEvents = events.filter(event => event.type)
-    res.render("events/events", { title: 'Technical Events', events: technicalEvents})
+    res.render("events/events", { title: 'Technical Events', user: req.user, events: technicalEvents})
 })
 
 // ---------- NON-TECHNICAL EVNETS PAGE ------------
@@ -25,7 +25,7 @@ router.get("/tech", async (req, res) => {
 router.get("/nontech", async (req, res) => {
     const events = await Event.find()
     const nonTechnicalEvents = events.filter(event => !event.type)
-    res.render("events/events", { title: 'Non-Technical Events', events: nonTechnicalEvents})
+    res.render("events/events", { title: 'Non-Technical Events', user: req.user, events: nonTechnicalEvents})
 })
 
 
@@ -40,7 +40,7 @@ router.get("/new", (req, res) => {
         type: 1
     })
 
-    res.render("events/createEvent", { event : dummyEvent })
+    res.render("events/createEvent", { event : dummyEvent, user: req.user, operation: "new" })
 })
 
 router.post("/new", async (req, res) => {
@@ -66,13 +66,13 @@ router.post("/new", async (req, res) => {
 
 router.get("/:id", async (req, res) => {
     const event = await Event.findById(req.params.id)
-    res.render("events/event", { event: event})
+    res.render("events/event", { event: event, user: req.user})
 })
 
 // ---------- UPDATING A EVENT ---------------
 router.get("/edit/:id", async (req, res) => {
     const event = await Event.findById(req.params.id)
-    res.render("events/createEvent", { event: event, operation: "edit"})
+    res.render("events/createEvent", { event: event, user: req.user, operation: "edit"})
 })
 
 router.put("/:id", async (req, res) => {
