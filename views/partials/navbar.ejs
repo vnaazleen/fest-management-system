@@ -1,6 +1,6 @@
 <div class="bg-dark container-fluid">
     <header
-        class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
+        class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 border-bottom">
         <a href="/" class="d-flex align-items-center col-md-3 mb-2 mb-md-0 text-dark text-decoration-none">
             <span class="display-5 text-white">VIVA VVIT</span>
         </a>
@@ -23,9 +23,10 @@
 
         <div class="col-md-3 text-end">
             <% if(user == null) { %>
-                <a  href="/auth/login" class="btn btn-outline-primary me-2">Login</a>
-                <a  href="/auth/register" class="btn btn-primary">Register</a>
+                <a  href="/auth/login" class="btn btn-primary">Login</a>
+                <a  href="/auth/register" class="btn btn-outline-primary me-2">Register</a>
             <% } else { %>
+                <a  href="/profile" class="btn btn-primary">Profile</a>
                 <a  href="/auth/logout" class="btn btn-outline-primary me-2">Logout</a>
             <% } %>
         </div>

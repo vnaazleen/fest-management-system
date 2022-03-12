@@ -24,7 +24,7 @@ router.post("/register", async (req, res) => {
     console.log(req.body)
 
     User.register(({
-        email: req.body.email,
+        username: req.body.username,
         name: req.body.name,
         college: req.body.college,
         branch: req.body.branch,
@@ -34,7 +34,7 @@ router.post("/register", async (req, res) => {
     (err, user) => {
         if(err) {
             console.log(err)
-            console.log(req.body.email);
+            console.log(req.body.username);
             res.redirect('/auth/register')
         } else {
             passport.authenticate("local")(req, res, () => {
@@ -47,7 +47,7 @@ router.post("/register", async (req, res) => {
 
 router.post("/login", (req, res) => {
     const user = new User({
-        email: req.body.email,
+        username: req.body.username,
         password: req.body.password
     })
 

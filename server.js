@@ -8,6 +8,7 @@ if (process.env.NODE_ENV !== 'production') {
 const mongoose = require('mongoose')
 const passport = require('passport')
 const session = require('express-session')
+const path = require('path')
 
 const app = express()
 
@@ -15,6 +16,7 @@ app.set('view engine', 'ejs')
 app.use(bodyParser.json());
 app.use(methodOverride('_method'))
 app.use(bodyParser.urlencoded({ extended: false }))
+app.use(express.static(__dirname + '/public'))
 
 // Passport & Session
 app.use(session({
@@ -44,9 +46,11 @@ passport.deserializeUser(User.deserializeUser())
 
 const eventRouter = require("./routes/events")
 const authRouter = require("./routes/auth")
+const profileRouter = require("./routes/profile")
 
 app.use('/events', eventRouter)
 app.use('/auth', authRouter)
+app.use('/', profileRouter)
 
 app.get("/", (req, res) => {
     res.render('home', { pageTitle: "VIVA VVIT - Home", user: req.user})
