@@ -85,30 +85,40 @@ router.get("/id/:id", async (req, res) => {
 
 // ---------- UPDATING A EVENT ---------------
 router.get("/edit/:id", async (req, res) => {
-    const event = await Event.findById(req.params.id)
-    res.render("events/createEvent", { event: event, user: req.user, operation: "edit"})
+    if(typeof req.user !== 'undefined' && req.user.admin) {
+        const event = await Event.findById(req.params.id)
+        res.render("events/createEvent", { event: event, user: req.user, operation: "edit"})
+    } else {
+        res.redirect("/events")
+    }
 })
 
 router.put("/:id", async (req, res) => {
-
-    const type = parseInt(req.body.type)
+    if(typeof req.user !== 'undefined' && req.user.admin) {
+        const type = parseInt(req.body.type)
     
-    await Event.findByIdAndUpdate(
-        req.params.id,
-        {
-            title: req.body.title,
-            image: req.body.image,
-            description: req.body.description,
-            type: type
-        }
-    )
+        await Event.findByIdAndUpdate(
+            req.params.id,
+            {
+                title: req.body.title,
+                image: req.body.image,
+                description: req.body.description,
+                type: type
+            }
+        )
 
-    res.redirect(`/events/${req.params.id}`)
+        res.redirect(`/events/${req.params.id}`)
+    } else {
+        res.redirect("/events")
+    }
 })
 
 // ---------- DELETING A EVENT ---------------
 router.delete("/:id", async (req, res) => {
-    await Event.findByIdAndDelete(req.params.id)
+    if(typeof req.user !== 'undefined' && req.user.admin) {
+        await Event.findByIdAndDelete(req.params.id)
+    }
+
     res.redirect("/events")
 })
 

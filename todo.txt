@@ -1,11 +1,14 @@
 - Last modified: events.js Line:128
 
-Next Task:
+Tasks Done:
 - Create a button in event file --> done
 - Create a page with my events for user --> done
-- Unregister/register functionality for events 
+- Unregister/register functionality for events --> done
 - Show registered in event page  --> done
+- Create a admin with specal credentials --> done
+- And hide edit & del buttons --> done
 
-Some time later:
-- Create a admin with specal credidentials
-- And hide edit & del buttons 
+Todo tasks:
+- Add Carousel to home page 
+- Add info about college
+- Add about us page
