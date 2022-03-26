@@ -5,7 +5,13 @@ const eventSchema = new Schema({
     title: String,
     image: String,
     description: String,
-    type: Number
+    type: Number,
+    registeredUsers: [
+        {
+            type: mongoose.Schema.ObjectId,
+            ref: 'User'
+        }
+    ]
 })
 
 const Event = mongoose.model('Event', eventSchema)

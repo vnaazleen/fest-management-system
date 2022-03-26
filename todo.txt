@@ -1,0 +1,11 @@
+- Last modified: events.js Line:128
+
+Next Task:
+- Create a button in event file --> done
+- Create a page with my events for user --> done
+- Unregister/register functionality for events 
+- Show registered in event page  --> done
+
+Some time later:
+- Create a admin with specal credidentials
+- And hide edit & del buttons 

@@ -11,7 +11,17 @@ const userSchema = new Schema({
     branch: { type : String ,  required : true},
     phone: { type : Number ,  required : true},
     password: {type: String},
+    admin: { type: Boolean, default: false},
+    registeredEvents: [{
+        type: mongoose.Schema.ObjectId,
+        ref: 'Event'
+    }]
 })
+
+userSchema.pre('find', function (next) {
+    this.populate("registeredEvents");
+    next();
+  });
 
 userSchema.plugin(passportLocalMongoose)
 

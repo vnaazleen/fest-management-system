@@ -2,7 +2,7 @@ const express = require('express')
 const router = express.Router()
 
 const Event = require('../models/event')
-
+const User = require('../models/user')
 
 // --------------- EVENTS PAGES ---------------
 
@@ -64,9 +64,24 @@ router.post("/new", async (req, res) => {
 
 // ---------- READING A EVENT ---------------
 
-router.get("/:id", async (req, res) => {
+router.get("/id/:id", async (req, res) => {
     const event = await Event.findById(req.params.id)
-    res.render("events/event", { event: event, user: req.user})
+    let registered = false 
+
+    if(req.user != null) {
+        user = await User.findById(req.user.id).populate('registeredEvents')
+        console.log(user)
+
+        const event = await Event.findById(req.params.id)
+
+        registered = user.registeredEvents.filter((event) => {
+            return event.id == req.params.id
+        }).length > 0
+
+        console.log(registered)
+    }
+
+    res.render("events/event", { event: event, user: req.user, registered: registered})
 })
 
 // ---------- UPDATING A EVENT ---------------
@@ -97,6 +112,67 @@ router.put("/:id", async (req, res) => {
 router.delete("/:id", async (req, res) => {
     await Event.findByIdAndDelete(req.params.id)
     res.redirect("/events")
+})
+
+// ----------- REGISTER FOR A USER ------------
+router.post("/register/:id", async (req, res) => {
+
+    if(typeof req.user === 'undefined') {
+        res.redirect("/auth/login")
+    } else {
+
+        User.findByIdAndUpdate(
+            req.user.id,
+            {
+                $push: {
+                    registeredEvents: req.params.id
+                }, 
+            },
+            { new: true, useFindAndModify: false }
+            , (err, result) => {
+                if (err) {
+                    return res.status(400).json({
+                        error: err
+                    });
+                }
+            }
+        )
+
+        Event.findByIdAndUpdate(
+            req.params.id,
+            {
+                $push: {
+                    registeredUsers: req.user.id
+                }
+            },
+            { new: true, useFindAndModify: false }, 
+            (err, result) => {
+                if (err) {
+                    return res.status(400).json({
+                        error: err
+                    });
+                }
+            }
+        )
+
+        user = await User.findById(req.user.id).populate('registeredEvents')
+        console.log(user)
+    
+        res.redirect("/")
+    }
+})
+
+// ------------ GET USER'S EVENTS --------------
+router.get("/myEvents", async (req, res) => {
+    console.log("In my events")
+    if(typeof req.user === 'undefined') {
+        res.redirect("/auth/login")
+    } else {
+        user = await User.findById(req.user.id).populate('registeredEvents')
+        console.log(user)
+
+        res.render("events/myEvents", { title: 'My Events', user: req.user, events: user.registeredEvents })
+    }
 })
 
 
