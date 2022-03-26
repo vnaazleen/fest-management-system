@@ -20,7 +20,12 @@
                 <button class="btn btn-primary">Register</button>
             </form>
         <% } else { %>
-            <button class="btn btn-success" disabled>Registered</button>
+            <div class="alert alert-success" role="alert">
+                You've registered for the event
+            </div>
+            <form action="/events/unregister/<%= event.id %>" method="post" class="d-inline">
+                <button class="btn btn-danger">UnRegister</button>
+            </form>
         <% } %>
 
         <a href="/events/edit/<%= event.id %>" class="btn btn-warning">Edit</a>

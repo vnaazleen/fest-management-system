@@ -1,10 +1,15 @@
 <%- include('../partials/header', { pageTitle: "VIVA VVIT - My Events", user: user}) -%>
 
 <div class="container">
-    <h1 class="lead display-4 mb-5"><%= title %></h1>
+    <h1 class="lead display-4 mb-5 mt-5"><%= title %></h1>
 
     <% if(events.length == 0) { %>
-        <p class="lead">Currently, No <%= title %> :( <br> Come back later...</p>
+        <p class="lead">You're not registered for any events :( 
+            <br>
+            Register for any event, they will appear here...
+            <br>
+            <a href="/events">view events</a>
+        </p>
     <% } %>
 
     <div class="row">

@@ -63,7 +63,6 @@ router.post("/new", async (req, res) => {
 
 
 // ---------- READING A EVENT ---------------
-
 router.get("/id/:id", async (req, res) => {
     const event = await Event.findById(req.params.id)
     let registered = false 
@@ -108,7 +107,6 @@ router.put("/:id", async (req, res) => {
 })
 
 // ---------- DELETING A EVENT ---------------
-
 router.delete("/:id", async (req, res) => {
     await Event.findByIdAndDelete(req.params.id)
     res.redirect("/events")
@@ -158,7 +156,55 @@ router.post("/register/:id", async (req, res) => {
         user = await User.findById(req.user.id).populate('registeredEvents')
         console.log(user)
     
-        res.redirect("/")
+        res.redirect("/events/id/" + req.params.id)
+    }
+})
+
+// TODO: ----------- UNREGISTER USER FROM EVENT --------------------
+router.post("/unregister/:id", async (req, res) => {
+
+    if(typeof req.user === 'undefined') {
+        res.redirect("/auth/login")
+    } else {
+
+        User.findByIdAndUpdate(
+            req.user.id,
+            {
+                $pull: {
+                    registeredEvents: req.params.id
+                }, 
+            },
+            { new: true, useFindAndModify: false }
+            , (err, result) => {
+                if (err) {
+                    return res.status(400).json({
+                        error: err
+                    });
+                }
+            }
+        )
+
+        Event.findByIdAndUpdate(
+            req.params.id,
+            {
+                $pull: {
+                    registeredUsers: req.user.id
+                }
+            },
+            { new: true, useFindAndModify: false }, 
+            (err, result) => {
+                if (err) {
+                    return res.status(400).json({
+                        error: err
+                    });
+                }
+            }
+        )
+
+        user = await User.findById(req.user.id).populate('registeredEvents')
+        console.log(user)
+    
+        res.redirect("/events/id/" + req.params.id)
     }
 })
 
