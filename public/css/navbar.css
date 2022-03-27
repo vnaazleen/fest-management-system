@@ -36,3 +36,7 @@ footer {
 footer p {
     margin-top: 50px;
 }
+
+img {
+    max-width: 100%;
+}
