@@ -9,6 +9,6 @@ Tasks Done:
 - And hide edit & del buttons --> done
 
 Todo tasks:
-- Add Carousel to home page 
-- Add info about college
-- Add about us page
+- Add Carousel to home page  --> done
+- Add info about college --> done
+- Add about us page --> done

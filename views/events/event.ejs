@@ -28,7 +28,7 @@
             </form>
         <% } %>
 
-        <% if(user.admin) { %>
+        <% if(user && user.admin) { %>
             <a href="/events/edit/<%= event.id %>" class="btn btn-warning">Edit</a>
 
             <form action="/events/<%= event.id %>?_method=DELETE" method="post" class="d-inline">

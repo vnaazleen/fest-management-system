@@ -1,12 +1,7 @@
 <%- include('./partials/header', { pageTitle: "VIVA VVIT - Home", user: user}) -%>
+<%- include('./partials/slider'); -%>
 
 
-<h1>Fest management system</h1>
-<hr>
-<% if(user) { %>
-    <h2>Welcome, <%= user.name %></h2>
-<% } else { %>
-    <h2>Welcome!</h2>
-<% } %>
+<%- include('./partials/home_content', {user: user}) -%>
 
 <%- include('./partials/footer') -%>
